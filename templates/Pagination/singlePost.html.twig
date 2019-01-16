@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+
+{% if singlePost is not empty %}
+
+        {{ singlePost.title }}
+
+{% endif %}
+
+
+
+
+
+    {% endif %}
+{% endblock %}

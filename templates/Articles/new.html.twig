@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    {% for message in app.flashes('notice') %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+
+    {{ form_label(form.title) }}
+    {{ form_errors(form.title) }}
+    {{ form_widget(form.title) }}
+
+    {{ form_label(form.body) }}
+    {{ form_errors(form.body) }}
+    {{ form_widget(form.body) }}
+
+    {{ form_end(form) }}
+
+    <script>
+        $(".alert").alert('close')
+    </script>
+
+{% endblock %}

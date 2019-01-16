@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+
+
+
+    {% if singleArticle is not empty %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ singleArticle.title }}</h3>
+                    <p>{{ singleArticle.body }}</p>
+                </div>
+            </div>
+
+    {% endif %}
+
+
+
+    {{ form_start(newComment) }}
+
+    {{ form_label(newComment.title) }}
+    {{ form_errors(newComment.title) }}
+    {{ form_widget(newComment.title) }}
+
+    {{ form_label(newComment.comments) }}
+    {{ form_errors(newComment.comments) }}
+    {{ form_widget(newComment.comments) }}
+
+    {{ form_end(newComment) }}
+
+{% endblock %}

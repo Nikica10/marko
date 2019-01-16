@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbarProduct.html.twig') }}
+    <h1>Proizvodi</h1>
+
+    {% if products is not empty %}
+
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ products.name }}</h3>
+                    <p>{{ products.description }}</p>
+                    <p><small>{{ products.price }}</small> kn</p>
+                </div>
+            </div>
+
+
+
+    {% endif %}
+
+{% endblock %}

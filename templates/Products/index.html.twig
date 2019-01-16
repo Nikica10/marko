@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbarProduct.html.twig') }}
+ <h1>Proizvodi</h1>
+
+    {% if products is not empty %}
+
+        {% for product in products %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description }}</p>
+                    <p><small>{{ product.price }}</small> kn</p>
+                    <a href="{{ path('product_single_id', {'id' : product.id}) }}">Read more</a>
+                    <a href="{{ path('product_show', {'name' : product.name}) }}">Find By Name</a>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

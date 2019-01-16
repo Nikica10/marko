@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+    {% for message in app.flashes('notice') %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+
+    {% if pagination is not empty %}
+
+
+
+        {% for signlePost in pagination %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ signlePost.title }}</h3>
+                    <p>{{ signlePost.content[:150] ~ (signlePost.content|length > 150 ? '...') }}</p>
+                    <button type="button" class="btn btn-primary btn-sm">
+                        <a href="{{ path('single_post', {'id' : signlePost.id}) }}">Read More</a>
+                    </button>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+        {% set canPrevious = page > 1 %}
+        {% set canNext = (page * entryLimit) < totalBlogPosts %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if canPrevious %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('pagination_page', {'page': page - 1}) }}">
+                            <span aria-hidden="true">&larr;</span> Next
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('pagination_page', {'page': page - 1}) }}">
+                            {{ page - 1 }}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if page == page %}
+                    <li class="page-item">
+                        <a class="page-link active" href="{{ path('pagination_page', {'page': page }) }}">
+                            <span class="sr-only">(current)</span> {{ page }}
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if canNext %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ path('pagination_page', {'page': page + 1}) }}">
+                            {{ page + 1 }}
+                        </a>
+                    </li>
+                    <li class="page-item">
+                         <a class="page-link" href="{% if canNext %}{{ path('pagination_page', {'page': page + 1}) }}{% endif %}">
+                            Previous <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <pre>
+    {#{{ dump(totalBlogPosts) }}#}
+    {#{{ dump(page) }}#}
+    {#{{ dump(page * entryLimit) }}#}
+</pre>
+
+
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ include('Includes/navbar.html.twig') }}
+    {% for message in app.flashes('notice') %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
+
+
+    {% if posts is not empty %}
+
+        {#{{ dump(posts) }}#}
+
+        {% for signlePost in posts %}
+
+            <div class="row">
+                <div class="col-md-4">
+                    <h3>{{ signlePost.title }}</h3>
+                    <p>{{ signlePost.body }}</p>
+                </div>
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+
+    <script>
+        $(".alert").alert('close')
+    </script>
+
+{% endblock %}
